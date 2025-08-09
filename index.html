@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HBio — Currículo, Ciência & Curiosidades</title>
+  <meta name="description" content="Landing page pessoal para divulgação de currículo, produção científica e interesses de pesquisa de HBio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    /* ===================
+       Design tokens
+    =================== */
+    :root{
+      --bg: #0b1020;
+      --panel: #0f1530;
+      --panel-2:#0b122a;
+      --muted: #94a3b8;
+      --text: #e6eaf2;
+      --brand: #7c3aed;
+      --brand-2: #06b6d4;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 22px;
+      --gap: clamp(14px, 3.5vw, 28px);
+      --maxw: 1120px;
+      --tap: 48px; /* min tap target */
+    }
+    [data-theme="light"]{
+      --bg:#fbfbfe;
+      --panel:#ffffff;
+      --panel-2:#f6f7fb;
+      --text:#0f172a;
+      --muted:#475569;
+      --shadow: 0 10px 24px rgba(2,6,23,.08);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial;
+      color:var(--text);
+      background: radial-gradient(800px 400px at 10% -10%, rgba(124,58,237,.25), transparent 60%),
+                 radial-gradient(600px 400px at 90% 10%, rgba(6,182,212,.18), transparent 50%),
+                 var(--bg);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; height:auto; display:block}
+    button{font:inherit; color:inherit}
+
+    /* ===================
+       Header - mobile first
+    =================== */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(11,16,32,.7);
+      border-bottom:1px solid rgba(255,255,255,.06)
+    }
+    [data-theme="light"] header{background:rgba(255,255,255,.85); border-color:rgba(2,6,23,.06)}
+    .nav.container{max-width:var(--maxw); margin:auto; padding:0 var(--gap); display:flex; align-items:center; justify-content:space-between; min-height:64px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.3px}
+    .logo{width:36px; height:36px; border-radius:12px; background:conic-gradient(from 180deg, var(--brand), var(--brand-2)); box-shadow:var(--shadow)}
+    nav ul{list-style:none; margin:0; padding:var(--gap) 0; display:none; flex-direction:column; gap:8px}
+    nav ul.open{display:flex}
+    nav a, .theme-toggle{
+      padding:10px 14px; border-radius:12px;
+      min-height: var(--tap); display:inline-flex; align-items:center; justify-content:center;
+    }
+    nav a:hover{background:rgba(255,255,255,.06)}
+    [data-theme="light"] nav a:hover{background:rgba(2,6,23,.06)}
+    .menu-btn{display:inline-flex; align-items:center; justify-content:center; width:var(--tap); height:var(--tap); background:transparent; border:0}
+    .theme-toggle{border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.06); cursor:pointer}
+    [data-theme="light"] .theme-toggle{background:#fff; border-color:rgba(2,6,23,.08)}
+
+    /* Quick links (Lattes/ORCID) */
+    .quick-links{display:flex; gap:8px; flex-wrap:wrap}
+    .ql{border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.06)}
+    [data-theme="light"] .ql{background:#fff; border-color:rgba(2,6,23,.08)}
+
+    /* ===================
+       Layout & sections
+    =================== */
+    .container{max-width:var(--maxw); margin:auto; padding:0 var(--gap)}
+    section{padding: clamp(28px, 8vw, 84px) 0}
+    .section-title{display:flex; align-items:center; gap:12px; margin:0 0 18px}
+    .section-title .dot{width:10px; height:10px; border-radius:50%; background:linear-gradient(160deg, var(--brand), var(--brand-2))}
+    .section-title h2{margin:0; font-size: clamp(20px, 4.5vw, 34px)}
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns:1fr; gap:var(--gap); align-items:center}
+    .hero-card{
+      background:linear-gradient(to bottom right, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08); border-radius:var(--radius);
+      padding: clamp(16px, 5.5vw, 28px); box-shadow:var(--shadow)
+    }
+    [data-theme="light"] .hero-card{background:#fff; border-color:rgba(2,6,23,.06)}
+    .hero h1{font-family:"DM Serif Display", serif; font-size: clamp(28px, 9vw, 58px); line-height:1.1; margin:0 0 10px}
+    .hero p.lead{font-size: clamp(14px, 4.2vw, 18px); color:var(--muted); margin:0 0 18px}
+    .cta{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.06)}
+    .btn.primary{background:linear-gradient(90deg, var(--brand), var(--brand-2)); color:#091021; border-color:transparent; font-weight:700}
+    [data-theme="light"] .btn{background:#fff; border-color:rgba(2,6,23,.08)}
+    .blob{aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 35% 30%, rgba(124,58,237,.7), transparent 60%), radial-gradient(circle at 75% 70%, rgba(6,182,212,.6), transparent 62%), linear-gradient(120deg, rgba(255,255,255,.08), rgba(255,255,255,0)); filter: drop-shadow(0 40px 60px rgba(0,0,0,.4)); min-height:260px}
+
+    /* Cards grid */
+    .card-grid{display:grid; grid-template-columns:1fr; gap:var(--gap)}
+    .card{background:var(--panel); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)}
+    [data-theme="light"] .card{background:#fff; border-color:rgba(2,6,23,.06)}
+    .muted{color:var(--muted)}
+
+    /* Timeline */
+    .timeline{position:relative; padding-left:18px}
+    .timeline::before{content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:linear-gradient(var(--brand), var(--brand-2))}
+    .edu-item{margin:18px 0 0 0; padding:12px 14px; background:rgba(255,255,255,.03); border-radius:14px; border:1px solid rgba(255,255,255,.06)}
+    [data-theme="light"] .edu-item{background:#f7f7fb; border-color:rgba(2,6,23,.06)}
+    .edu-item b{display:block; font-weight:700}
+    .edu-item small{color:var(--muted)}
+
+    /* Chips */
+    .chips{display:flex; flex-wrap:wrap; gap:10px}
+    .chip{padding:10px 14px; border-radius:999px; border:1px dashed rgba(255,255,255,.2); background:rgba(255,255,255,.03)}
+    [data-theme="light"] .chip{background:#fff; border-color:rgba(2,6,23,.12)}
+
+    /* Hobbies */
+    .hobbies{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:var(--gap)}
+    .hob{background:var(--panel-2); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px}
+    [data-theme="light"] .hob{background:#f7f7fb; border-color:rgba(2,6,23,.06)}
+    .hob h4{margin:0 0 6px}
+
+    /* Lists */
+    .pub-list{display:grid; gap:14px}
+    .pub{padding:14px; border:1px solid rgba(255,255,255,.08); border-radius:14px; background:rgba(255,255,255,.03)}
+    [data-theme="light"] .pub{background:#fff; border-color:rgba(2,6,23,.06)}
+    .pub .meta{font-size:13px; color:var(--muted)}
+
+    /* Contact */
+    .contact{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:var(--gap)}
+    .contact a.card{display:flex; align-items:center; gap:12px; padding:18px; transition:transform .15s ease}
+    .contact a.card:hover{transform: translateY(-2px)}
+
+    footer{padding:28px 0 40px; color:var(--muted); border-top:1px solid rgba(255,255,255,.06)}
+    [data-theme="light"] footer{border-color:rgba(2,6,23,.06)}
+
+    /* ===================
+       Breakpoints (progressively enhance)
+    =================== */
+    @media (min-width: 720px){
+      nav ul{display:flex; flex-direction:row; align-items:center; gap:14px; padding:0}
+      .menu-btn{display:none}
+      .hero{grid-template-columns:1.15fr .85fr}
+      .card-grid{grid-template-columns:repeat(12, 1fr)}
+      .card{grid-column:span 12}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav container">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>HBio</span>
+      </div>
+      <nav>
+        <button class="menu-btn" aria-label="Abrir menu" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#formacao">Formação</a></li>
+          <li><a href="#formacao-complementar">Formação Complementar</a></li>
+          <li><a href="#interesses">Interesses</a></li>
+          <li><a href="#hobbies">Hobbies</a></li>
+          <li><a href="#producao">Produção</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li><button id="themeToggle" class="theme-toggle" aria-label="Alternar tema">🌓 Tema</button></li>
+          <li class="quick-links">
+            <a class="ql btn" href="http://lattes.cnpq.br/7501452995791594" target="_blank" rel="noopener">📄 Lattes</a>
+            <a class="ql btn" href="https://orcid.org/0000-0001-8209-0705" target="_blank" rel="noopener">🧬 ORCID</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO / SOBRE -->
+    <section id="sobre" class="container hero">
+      <div class="hero-card">
+        <h1>Olá, eu sou o <span style="background:linear-gradient(90deg, var(--brand), var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent">Antonio Henrique Bezerra</span>.</h1>
+        <p class="lead">
+          Biólogo (URCA), Mestre e doutorando em <strong>Química Biológica</strong> (PPQB/URCA), bolsista CAPES. Atuo com microbiologia clínica,
+          resistência bacteriana e produtos naturais, com foco em bioprodutos de <em>abelhas sem ferrão</em> (Melipona) e suas interações com bombas de efluxo.
+          Experiência em cultura bacteriana, ensaios de sensibilidade, modelagem/docking molecular e divulgação científica.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#producao">Ver produção</a>
+          <a class="btn" href="#contato">Falar comigo</a>
+        </div>
+      </div>
+      <div class="blob" aria-hidden="true"></div>
+    </section>
+
+    <!-- FORMAÇÃO ACADÊMICA -->
+    <section id="formacao" class="container">
+      <div class="section-title"><span class="dot"></span><h2>Formação Acadêmica</h2></div>
+      <div class="card timeline">
+        <div class="edu-item">
+          <b>Doutorado — Química Biológica (em andamento)</b>
+          <small>Universidade Regional do Cariri (URCA) — 2025–atual</small>
+          <div class="muted">Título: <i>Avaliação antibacteriana e antifúngica dos constituintes majoritários de extratos de Melipona rufiventris</i> e suas interações moleculares com proteínas de efluxo. Orientador: Prof. Francisco Assis Bezerra da Cunha. Bolsa CAPES. Palavras‑chave: abelhas sem ferrão; resistência bacteriana; dinâmica molecular.</div>
+        </div>
+        <div class="edu-item">
+          <b>Mestrado — Química Biológica</b>
+          <small>URCA — 2023–2025</small>
+          <div class="muted">Título: <i>Caracterização química dos produtos de Melipona scutellaris</i> e avaliação da sua atividade antibacteriana frente cepas multirresistentes portadoras de bomba de efluxo. Orientador: Prof. Francisco A. B. da Cunha. Bolsa FUNCAP.</div>
+        </div>
+        <div class="edu-item">
+          <b>Especialização — Biotecnologia</b>
+          <small>Faculdade Única de Ipatinga (FUNIP) — 2023–2024</small>
+        </div>
+        <div class="edu-item">
+          <b>Graduação — Ciências Biológicas (Bacharelado)</b>
+          <small>URCA — 2018–2023</small>
+          <div class="muted">TCC: <i>Efeito das nor‑riparinas I–IV na modificação da resistência à ciprofloxacina e ao brometo de etídio</i> em <i>Staphylococcus aureus</i> K2068 (bomba de efluxo MepA). Orientador: Prof. Francisco A. B. da Cunha.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMAÇÃO COMPLEMENTAR -->
+    <section id="formacao-complementar" class="container">
+      <div class="section-title"><span class="dot"></span><h2>Formação Complementar</h2></div>
+      <div class="card">
+        <ul class="muted" style="columns:2; gap:24px; padding-left:18px">
+          <li>(2023) Serpentes: Informações Básicas — ESIB/Instituto Butantan — 30h</li>
+          <li>(2023) Introdução à Docagem Molecular — URCA — 8h</li>
+          <li>(2022) Biossegurança em foco — Fiocruz‑PE — 45h</li>
+          <li>(2022) Biossegurança — Fiocruz‑PE — 50h</li>
+          <li>(2022) Preparo e Manejo do Solo para Produção Orgânica de Fruteiras — EMBRAPA — 32h</li>
+          <li>(2021) Síndrome de Polinização e Ecologia de Polinizadores — IF Farroupilha — 3h</li>
+          <li>(2021) Discutindo Gênero e Sexualidade no Ensino de Ciências e Biologia — IF Farroupilha — 3h</li>
+          <li>(2021) Entomologia Forense: Conceitos e Aplicações — IF Farroupilha — 3h</li>
+          <li>(2021) Agrobiodiversidade: Importância e Estratégias de Conservação — IF Farroupilha — 3h</li>
+          <li>(2021) Microscopia Caseira e o Ensino de Ciências — IF Farroupilha — 3h</li>
+          <li>(2021) Acidentes por Animais Peçonhentos e Venenosos — IF Farroupilha — 3h</li>
+          <li>(2021) Meliponicultura urbana — EMBRAPA — 12h</li>
+          <li>(2021) Introdução ao Acesso a Patrimônio Genético Nativo e Conhecimentos Tradicionais — EMBRAPA — 10h</li>
+          <li>(2021) Ferramentas de Bioinformática para Análise de Proteínas e Peptídeos — EVL — 7h</li>
+          <li>(2021) Iniciação em Programação Python para Análise de Bioinformática — EVL — 7h</li>
+          <li>(2021) Uma Introdução ao Marxismo — URCA — 4h</li>
+          <li>(2020–2021) Fundamentos de Estatística — CAPES — 60h</li>
+          <li>(2020) Produção e extração de enzimas de interesse farmacêutico — URCA — 4h</li>
+          <li>(2020) Técnicas moleculares para detecção de resistência antimicrobiana — URCA — 8h</li>
+          <li>(2020) Ecologia e conservação de mamíferos em tempos de pandemia — URCA — 8h</li>
+          <li>(2020) Prospecção de compostos bioativos em vasos sanguíneos de cordões umbilicais — URCA — 8h</li>
+          <li>(2020) Anátomo‑fisiologia do músculo liso e aplicações ex vivo — URCA — 8h</li>
+          <li>(2020) Segurança Química em Laboratórios de Ensino e Pesquisa — ENAP — 40h</li>
+          <li>(2020) Investigação de produtos naturais para o controle de microrganismos — URCA — 4h</li>
+          <li>(2020) Vírus respiratórios emergentes (incl. COVID‑19) — UFRN — 4h</li>
+          <li>(2019) Métodos de purificação e caracterização de proteínas — URCA — 8h</li>
+          <li>(2018) Manuseio de Animais em Testes Experimentais — URCA — 8h</li>
+          <li>(2018) Desafios da Conservação de Répteis e Anfíbios no Sul Cearense — URCA — 80h</li>
+          <li>(2018) Dendrologia — URCA — 8h</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ÁREAS DE INTERESSE -->
+    <section id="interesses" class="container">
+      <div class="section-title"><span class="dot"></span><h2>Áreas de Interesse</h2></div>
+      <div class="card chips">
+        <span class="chip">Biotecnologia</span>
+        <span class="chip">Microbiologia Clínica</span>
+        <span class="chip">Bacteriologia</span>
+        <span class="chip">Abelhas sem ferrão</span>
+        <span class="chip">Resistência bacteriana</span>
+        <span class="chip">Produtos naturais</span>
+      </div>
+    </section>
+
+    <!-- HOBBIES / PASSATEMPOS -->
+    <section id="hobbies" class="container">
+      <div class="section-title"><span class="dot"></span><h2>Hobbies & Passatempos</h2></div>
+      <div class="hobbies">
+        <div class="hob">
+          <h4>Fotografia & Edição</h4>
+          <p class="muted">Exploro composição, luz e estilos artísticos — aplico em materiais científicos.</p>
+        </div>
+        <div class="hob">
+          <h4>PowerPoint científico</h4>
+          <p class="muted">Design de slides para aulas, seminários e divulgação científica.</p>
+        </div>
+        <div class="hob">
+          <h4>Divulgação Científica</h4>
+          <p class="muted">Produção de conteúdo acessível sobre microbiologia, biossegurança e conservação.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUÇÃO CIENTÍFICA -->
+    <section id="producao" class="container">
+      <div class="section-title"><span class="dot"></span><h2>Produção Científica</h2></div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Artigos</h3>
+          <div class="pub-list">
+            <div class="pub"><div><b>2025</b> — <i>Antibacterial Activity and Antibiotic Potentiation of <span style="font-style:italic">Melipona rufiventris</span> Bioproducts Against Multidrug‑Resistant Bacteria</i>. <span class="meta">Natural Product Communications. <a href="https://doi.org/10.1177/1934578X251349978" target="_blank" rel="noopener">DOI</a>. Autores: ANTONIO HENRIQUE BEZERRA; SUIENY RODRIGUES BEZERRA; CRISTINA RODRIGUES DOS SANTOS BARBOSA; DÉBORA FEITOSA MUNIZ; DÉBORA DE MENEZES DANTAS; ZILDENE DE SOUSA SILVEIRA; NAIR SILVA MACÊDO; THAÍS FERREIRA DA SILVA; CÍCERA DATIANE DE MORAIS OLIVEIRA‑TINTINO; HENRIQUE DOUGLAS DE MELO COUTINHO; JOSÉ GALBERTO MARTINS DA COSTA; HÉLCIO SILVA DOS SANTOS; FRANCISCO ASSIS BEZERRA DA CUNHA.</span></div></div>
+            <div class="pub"><div><b>2025</b> — <i>Naringenin as potentiator of norfloxacin efficacy through inhibition of the NorA efflux pump in <span style="font-style:italic">Staphylococcus aureus</span></i>. <span class="meta">Microbial Pathogenesis 203:107504. <a href="https://doi.org/10.1016/j.micpath.2025.107504" target="_blank" rel="noopener">DOI</a>. Autores: DÉBORA DE MENEZES DANTAS; NAIR SILVA MACÊDO; ZILDENE DE SOUSA SILVEIRA; CRISTINA RODRIGUES DOS SANTOS BARBOSA; DÉBORA FEITOSA MUNIZ; ANTONIO HENRIQUE BEZERRA; JOSIVÂNIA TEIXEIRA DE SOUSA; GABRIEL GONÇALVES ALENCAR; CÍCERA DATIANE DE MORAIS OLIVEIRA‑TINTINO; SAULO RELISON TINTINO; MATHEUS NUNES DA ROCHA; EMMANUEL SILVA MARINHO; MÁRCIA MACHADO MARINHO; HÉLCIO SILVA DOS SANTOS; HENRIQUE DOUGLAS MELO COUTINHO; FRANCISCO ASSIS BEZERRA DA CUNHA.</span></div></div>
+            <div class="pub"><div><b>2024</b> — <i>Chemical Characterization and Biological Activities of Jandaíra Stingless Bee Products (<span style="font-style:italic">Melipona subnitida</span>, Ducke, 1911): A Brief Review</i>. <span class="meta">Chemistry & Biodiversity 21:1–19. <a href="https://doi.org/10.1002/cbdv.202301407" target="_blank" rel="noopener">DOI</a>. Autores: DÉBORA DE MENEZES DANTAS; CRISTINA RODRIGUES DOS SANTOS BARBOSA; NAIR SILVA MACÊDO; ZILDENE DE SOUSA SILVEIRA; SUIENY RODRIGUES BEZERRA; ANTONIO HENRIQUE BEZERRA; JOSÉ BRUNO LIRA DA SILVA; JOSÉ GALBERTO MARTINS DA COSTA; TANIA MARIA SARMENTO SILVA; HENRIQUE DOUGLAS MELO COUTINHO; FRANCISCO ASSIS BEZERRA DA CUNHA.</span></div></div>
+            <div class="pub"><div><b>2023</b> — <i>Evaluation of the antibacterial and inhibitory activity of the MepA efflux pump of <span style="font-style:italic">Staphylococcus aureus</span> by riparins I, II, III, and IV</i>. <span class="meta">Archives of Biochemistry and Biophysics 748:109782. <a href="https://doi.org/10.1016/j.abb.2023.109782" target="_blank" rel="noopener">DOI</a>. Autores: CRISTINA RODRIGUES DOS SANTOS BARBOSA; NAIR SILVA MACÊDO; ZILDENE DE SOUSA SILVEIRA; JANAÍNA ESMERALDO ROCHA; THIAGO SAMPAIO FREITAS; DÉBORA FEITOSA MUNIZ; ISAAC MOURA ARAÚJO; CÍCERA DATIANE DE MORAIS OLIVEIRA‑TINTINO; EMMANUEL SILVA MARINHO; MATHEUS NUNES DA ROCHA; MÁRCIA MACHADO MARINHO; ANTONIO HENRIQUE BEZERRA; GABRIELA RIBEIRO DE SOUSA; JOSÉ MARIA BARBOSA‑FILHO; JAILTON SOUZA‑FERRARI; HÉLCIO SILVA DOS SANTOS; FRANCISCO ASSIS BEZERRA DA CUNHA.</span></div></div>
+            <div class="pub"><div><b>2022</b> — <i>Antibacterial activity of eugenol on the IS‑58 strain of <span style="font-style:italic">Staphylococcus aureus</span> resistant to tetracycline and toxicity in <span style="font-style:italic">Drosophila melanogaster</span></i>. <span class="meta">Microbial Pathogenesis 165:105456. <a href="https://doi.org/10.1016/j.micpath.2022.105456" target="_blank" rel="noopener">DOI</a>. Autores: SUIENY RODRIGUES BEZERRA; ANTONIO HENRIQUE BEZERRA; ZILDENE DE SOUSA SILVEIRA; NAIR SILVA MACÊDO; CRISTINA RODRIGUES DOS SANTOS BARBOSA; DÉBORA FEITOSA MUNIZ; JOYCY FRANCELY SAMPAIO DOS SANTOS; HENRIQUE DOUGLAS MELO COUTINHO; FRANCISCO ASSIS BEZERRA DA CUNHA.</span></div></div>
+            <div class="pub"><div><b>2022</b> — <i>Bioactivities of isolated and synthetic riparins of <span style="font-style:italic">Aniba riparia</span> (NEES) MEZ (LAURACEAE): A brief review</i>. <span class="meta">Phytochemistry Letters 52:149–160. <a href="https://doi.org/10.1016/j.phytol.2022.10.009" target="_blank" rel="noopener">DOI</a>. Autores: CRISTINA RODRIGUES DOS SANTOS BARBOSA; ANTÔNIO HENRIQUE BEZERRA; SUIENY RODRIGUES BEZERRA; NAIR SILVA MACÊDO; CÍCERA DATIANE DE MORAIS OLIVEIRA‑TINTINO; JOSÉ GALBERTO MARTINS DA COSTA; HENRIQUE DOUGLAS MELO COUTINHO; HÉLCIO SILVA DOS SANTOS; FRANCISCO ASSIS BEZERRA DA CUNHA.</span></div></div>
+            <div class="pub"><div><b>2022</b> — <i>Evaluation of ellagic acid and gallic acid as efflux pump inhibitors in strains of <span style="font-style:italic">Staphylococcus aureus</span></i>. <span class="meta">Biology Open 11. <a href="https://doi.org/10.1242/bio.059434" target="_blank" rel="noopener">DOI</a>. Autores: NAIR SILVA MACÊDO; CRISTINA RODRIGUES DOS SANTOS BARBOSA; ANTONIO HENRIQUE BEZERRA; ZILDENE DE SOUSA SILVEIRA; LARISSA DA SILVA; HENRIQUE DOUGLAS MELO COUTINHO; SAEID DASHTI; BONGLEE KIM; FRANCISCO ASSIS BEZERRA DA CUNHA; MÁRCIA VANUSA DA SILVA.</span></div></div>
+            <div class="pub"><div><b>2021</b> — <i>Effect of estragole over the RN4220 <span style="font-style:italic">Staphylococcus aureus</span> strain and its toxicity in <span style="font-style:italic">Drosophila melanogaster</span></i>. <span class="meta">Life Sciences 264:118675. <a href="https://doi.org/10.1016/j.lfs.2020.118675" target="_blank" rel="noopener">DOI</a>. Autores: ANTONIO HENRIQUE BEZERRA; SUIENY RODRIGUES BEZERRA; ZILDENE DE SOUSA SILVEIRA; CRISTINA RODRIGUES DOS SANTOS BARBOSA; THIAGO SAMPAIO FREITAS; DÉBORA FEITOSA MUNIZ; DÁRCIO LUIZ DE SOUSA JÚNIOR; JOSÉ PINTO SIQUEIRA JÚNIOR; ISYDÓRIO ALVES DONATO; HENRIQUE DOUGLAS MELO COUTINHO; FRANCISCO ASSIS BEZERRA DA CUNHA.</span></div></div>
+            <div class="pub"><div><b>2020</b> — <i><span style="font-style:italic">Caesalpinia ferrea</span> C. Mart. (Fabaceae) Phytochemistry, Ethnobotany, and Bioactivities: A Review</i>. <span class="meta">Molecules 25:3831–33. <a href="https://doi.org/10.3390/molecules25173831" target="_blank" rel="noopener">DOI</a>. Autores: NAIR SILVA MACÊDO; ZILDENE DE SOUSA SILVEIRA; ANTONIO HENRIQUE BEZERRA; JOSÉ GALBERTO MARTINS DA COSTA; HENRIQUE DOUGLAS MELO COUTINHO; BARBARA ROMANO; RAFFAELE CAPASSO; FRANCISCO ASSIS BEZERRA DA CUNHA; MÁRCIA VANUSA DA SILVA.</span></div></div>
+            <div class="pub"><div><b>Aceito 2024</b> — <i>Molecular docking and antibacterial and antibiotic‑modifying activities of synthetic chalcone (2E)‑1‑(3′‑aminophenyl)‑3‑(4‑dimethylaminophenyl)‑prop‑2‑en‑1‑one in a MepA efflux pump‑expressing <span style="font-style:italic">Staphylococcus aureus</span> strain</i>. <span class="meta">Folia Microbiologica (no prelo). DOI: a confirmar. Autores: LARISSA DA SILVA; CICERA ALANE COELHO GONÇALVES; ANTONIO HENRIQUE BEZERRA; CRISTINA RODRIGUES DOS SANTOS BARBOSA; JANAINA ESMERALDO ROCHA; YEDDA MARIA LOBO SOARES DE MATOS; LÍGIA CLÁUDIA CASTRO DE OLIVEIRA; HÉLCIO SILVA DOS SANTOS; HENRIQUE DOUGLAS MELO COUTINHO; FRANCISCO ASSIS BEZERRA DA CUNHA.</span></div></div>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Capítulos de Livro</h3>
+          <div class="pub-list">
+            <div class="pub"><div><b>2022</b> — <i>O PET‑Saúde como instrumento para a articulação do profissional biólogo na saúde: narrativas da formação e dos desafios encontrados na prática</i>. <span class="meta">Em: <i>Ciências da saúde: pluralidade dos aspectos que interferem na saúde humana 10</i> (Atena Editora), p. 246–261. ISBN: não informado no Lattes. <a href="https://www.atenaeditora.com.br/" target="_blank" rel="noopener">Site da editora</a>. Autores: L. DA SILVA; N. T. P. GOMES; L. Y. S. SILVA; C. A. C. GOLCALVES; R. T. PESSOA; S. R. BEZERRA; P. R. BATISTA; M. N. M. CARVALHO; A. H. BEZERRA; S. T. S. MACHADO; A. K. A. LIMA; N. S. MACEDO.</span></div></div>
+            <div class="pub"><div><b>2021</b> — <i>Investigação da distribuição dos casos de esquistossomose mansônica no Brasil e suas principais formas clínicas – uma revisão de literatura</i>. <span class="meta">Em: <i>A pesquisa em ciências biológicas: Desafios atuais e perspectivas futuras</i> (Atena Editora), p. 158–170. ISBN: não informado no Lattes. <a href="https://www.atenaeditora.com.br/" target="_blank" rel="noopener">Site da editora</a>. Autores: L. DA SILVA; P. P. M. CORDEIRO; N. T. P. GOMES; L. Y. S. SILVA; C. A. C. GOLCALVES; R. T. PESSOA; N. S. MACEDO; M. N. M. CARVALHO; J. R. SCHERF; P. R. BATISTA; A. H. BEZERRA; S. R. BEZERRA.</span></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="container">
+      <div class="section-title"><span class="dot"></span><h2>Contato</h2></div>
+      <div class="contact">
+        <a class="card" href="tel:+5587991938630" target="_blank" rel="noopener">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h2.8A2 2 0 0 1 8.9 3.72l.7 2.72a2 2 0 0 1-.45 1.94L8 9a16 16 0 0 0 7 7l.62-.15a2 2 0 0 1 1.94.45l2.71.7A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <div><b>Celular</b></div>
+            <div class="muted">(87) 99193-8630</div>
+          </div>
+        </a>
+        <a class="card" href="mailto:ahb.bio@urca.br" target="_blank" rel="noopener">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2"/><path d="m22 6-10 7L2 6" stroke="currentColor" stroke-width="2"/></svg>
+          <div>
+            <div><b>Email</b></div>
+            <div class="muted">ahb.bio@urca.br</div>
+          </div>
+        </a>
+        <a class="card" href="https://instagram.com/ahb.bio" target="_blank" rel="noopener">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="6" r="1.2" fill="currentColor"/></svg>
+          <div>
+            <div><b>Instagram</b></div>
+            <div class="muted">@ahb.bio</div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap">
+      <div>© <span id="year"></span> HBio — Todos os direitos reservados</div>
+      <div class="muted">Feito com ♥ em HTML + CSS</div>
+    </div>
+  </footer>
+
+  <script>
+    // Ano atual
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Tema
+    const rootEl = document.documentElement;
+    const stored = localStorage.getItem('hbio-theme');
+    if (stored) rootEl.setAttribute('data-theme', stored);
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const next = rootEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', next);
+      localStorage.setItem('hbio-theme', next);
+    });
+  </script>
+</body>
+</html>
